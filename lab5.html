@@ -17,7 +17,6 @@
       crossorigin="anonymous"
     ></script>
 
-
     <script>
       function submitForm() {
         const userObject = document.getElementById("myForm").elements;
@@ -57,9 +56,9 @@
         } else {
           const maskedPassword = "*".repeat(userData.Password.length);
           userInfoDiv.innerHTML = `<h3>Registration Successful!</h3>
-                                 <p>First Name: ${userData.fname}</p>
-                                 <p>Last Name: ${userData.lname}</p>
-                                 <p>Email: ${userData.email}</p>
+                                 <p>First Name: ${userData.FirstName}</p>
+                                 <p>Last Name: ${userData.LastName}</p>
+                                 <p>Email: ${userData.Email}</p>
                                  <p>Password: ${maskedPassword}</p>
                                  <p>Date of Birth: ${userData.DOB}</p>`;
         }
@@ -70,25 +69,26 @@
   <body>
     <h2 class="mb-4">Registration Form</h2>
     <div class="container mt-5">
-    <form id="myForm">
+      <form id="myForm">
         <div class="mb-3">
-      First Name: <input type="text" name="First Name" id="inputFname" /><br />
+          First Name:
+          <input type="text" name="FirstName" id="inputFname" /><br />
+        </div>
+        <div class="mb-3">
+          Last Name: <input type="text" name="LastName" id="inputLname" /><br />
+        </div>
+        <div class="mb-3">
+          Email: <input type="email" name="Email" id="inputEmail" /><br />
+        </div>
+        <div class="mb-3">
+          Password:
+          <input type="text" name="Password" id="inputPassword" /><br />
+        </div>
+        <div class="mb-3">
+          Date of Birth: <input type="date" name="DOB" id="inputDOB" /> <br />
+        </div>
+      </form>
     </div>
-    <div class="mb-3">
-      Last Name: <input type="text" name="Last Name" id="inputLname" /><br />
-    </div>
-    <div class="mb-3">
-      Email: <input type="email" name="Email" id="inputEmail" /><br />
-    </div>
-    <div class="mb-3">
-      Password:
-      <input type="text" name="Password" id="inputPassword" /><br />
-    </div>
-    <div class="mb-3">
-      Date of Birth: <input type="date" name="DOB" id="inputDOB" /> <br />
-    </div>
-    </form>
-</div>
     <button onclick="submitForm()">Submit Form</button>
 
     <div id="registration"></div>
