@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+
+    <script>
+      function submitForm() {
+        const userObject = document.getElementById("myForm").elements;
+        let RegistrationSuccess = true;
+        let userData = {};
+        let error = "";
+
+        const userArr = Array.from(userObject);
+
+        for (let userInput of userArr) {
+          if (!userInput.value) {
+            RegistrationSuccess = false;
+            error = `${userInput.name} is empty`;
+
+            break;
+          }
+
+          if (
+            userInput.name === "Password" &&
+            !userInput.value.includes("?") &&
+            !userInput.value.includes("!")
+          ) {
+            RegistrationSuccess = false;
+            error = `Password must contain either ! or ?.`;
+            console.log("Password must contain either ! or ?.");
+            break;
+          }
+          userData[userInput.name] = userInput.value;
+        }
+        const userInfoDiv = document.getElementById("registration");
+
+        if (!RegistrationSuccess) {
+          console.log("Registration successful!");
+          userInfoDiv.innerHTML = `<h3>Invalid Registration. Try again</h3>
+                                    <p>${error}</p>
+                                    `;
+        } else {
+          const maskedPassword = "*".repeat(userData.Password.length);
+          userInfoDiv.innerHTML = `<h3>Registration Successful!</h3>
+                                 <p>First Name: ${userData.fname}</p>
+                                 <p>Last Name: ${userData.lname}</p>
+                                 <p>Email: ${userData.email}</p>
+                                 <p>Password: ${maskedPassword}</p>
+                                 <p>Date of Birth: ${userData.DOB}</p>`;
+        }
+        return;
+      }
+    </script>
+  </head>
+  <body>
+    <h2 class="mb-4">Registration Form</h2>
+    <div class="container mt-5">
+    <form id="myForm">
+        <div class="mb-3">
+      First Name: <input type="text" name="First Name" id="inputFname" /><br />
+    </div>
+    <div class="mb-3">
+      Last Name: <input type="text" name="Last Name" id="inputLname" /><br />
+    </div>
+    <div class="mb-3">
+      Email: <input type="email" name="Email" id="inputEmail" /><br />
+    </div>
+    <div class="mb-3">
+      Password:
+      <input type="text" name="Password" id="inputPassword" /><br />
+    </div>
+    <div class="mb-3">
+      Date of Birth: <input type="date" name="DOB" id="inputDOB" /> <br />
+    </div>
+    </form>
+</div>
+    <button onclick="submitForm()">Submit Form</button>
+
+    <div id="registration"></div>
+  </body>
+</html>
