@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      async function ConsumeAPI() {
+        const url = "https://brianobruno.github.io/cats.json";
+        const options = {
+          method: "GET",
+        };
+        
+        const response = await fetch(url, options);
+        console.log("response", response);
+
+        const result = await response.text();
+        console.log("result", result);
+
+        const myObj = JSON.parse(result);
+        console.log("myObj", myObj);
+
+        
+        const catImage = document.getElementById("image");
+        catImage.src = myObj.catPhoto;
+
+       
+        const sortedFacts = myObj.facts.sort((a, b) => a.factId - b.factId);
+
+        
+        const table = document.getElementById("table-body");
+        
+
+        sortedFacts.forEach((fact) => {
+          const row = table.insertRow();
+          const col1 = row.insertCell(0);
+          const col2 = row.insertCell(1);
+          col1.textContent = fact.factId;
+          col2.textContent = fact.text;
+        });
+      }
+      
+    </script>
+  </head>
+  <body>
+    
+      <img
+        id="image"
+        src="https://images.ctfassets.net/ub3bwfd53mwy/5WFv6lEUb1e6kWeP06CLXr/acd328417f24786af98b1750d90813de/4_Image.jpg?w=750"
+        alt="Default Cat Image"
+        height="100"
+        width="100"
+        
+      />
+      <button onclick="ConsumeAPI()">Click Me</button>
+      <table class="table table-bordered table-dark" >
+        <thead>
+          <tr>
+            <th>Fact Id</th>
+            <th>Fact</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    
+  </body>
+</html>
