@@ -29,6 +29,7 @@
           id="search-spell"
           class="form-control"
           placeholder="Search for a spell..."
+          oninput="handleSearch(this.value)"
         />
       </div>
       <div id="spell-list" class="row"></div>
@@ -39,7 +40,7 @@
         <button id="next-page" class="btn btn-primary">Next</button>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
       let currentPage = 1;
@@ -103,10 +104,14 @@
         fetchSpells(document.getElementById("search-spell").value);
       };
 
-      document.getElementById("search-spell").oninput = (e) => {
+      // document.getElementById("search-spell").oninput = (e) => {
+      //   currentPage = 1;
+      //   fetchSpells(e.target.value);
+      // };
+      function handleSearch(value) {
         currentPage = 1;
-        fetchSpells(e.target.value);
-      };
+        fetchSpells(value);
+      }
 
       fetchSpells();
     </script>
